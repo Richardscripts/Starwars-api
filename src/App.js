@@ -1,26 +1,37 @@
 import React from 'react';
-import logo from './logo.svg';
+import Search from './Search/Search';
+import Header from './Header/Header.js';
 import './App.css';
+import loading from './images/loading.gif';
+import ErrorMaster from './ErrorBoundaries/ErrorMaster';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  state = {
+    loading: false,
+  };
+
+  toggleLoading = () => {
+    this.setState({
+      loading: !this.state.loading,
+    });
+  };
+
+  render() {
+    return (
+      <ErrorMaster>
+        <div className='App'>
+          <Header />
+          <Search toggleLoading={this.toggleLoading} />
+          {this.state.loading && (
+            <img
+              src={loading}
+              alt='A loading progress wheel indicating the data is still loading'
+            />
+          )}
+        </div>
+      </ErrorMaster>
+    );
+  }
 }
 
 export default App;

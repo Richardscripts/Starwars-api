@@ -1,11 +1,13 @@
 import React from 'react';
-import App from './App';
+
 import ReactDOM from 'react-dom';
+
+import Search from '../Search/Search';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
 
-  ReactDOM.render(<App />, div);
+  ReactDOM.render(<Search />, div);
 
   ReactDOM.unmountComponentAtNode(div);
 });
