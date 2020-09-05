@@ -4,6 +4,7 @@ import './Search.css';
 import ErrorMaster from '../ErrorBoundaries/ErrorMaster';
 import NextPage from '../NextPage/NextPage';
 import DisplayResults from '../DisplayResults/DisplayResults';
+import Fieldset from '../Fieldset/Fieldset';
 
 export default class Search extends React.Component {
   state = {
@@ -83,35 +84,14 @@ export default class Search extends React.Component {
   render() {
     return (
       <>
-        <div className='search-bar'>
-          <fieldset>
-            <legend>Search</legend>
-            <form onSubmit={(e) => this.handleSubmit(e)} action='#'>
-              <label htmlFor='Search'>Enter Search Terms: </label>
-              <input
-                type='text'
-                name='Search'
-                id='Search'
-                onChange={(e) => this.handleInput(e)}
-                ref={this.characterInput}
-              />
-              <button type='submit' disabled={this.state.selectInput === ''}>
-                Submit
-              </button>
-            </form>
-
-            <select onChange={(e) => this.handleSelect(e)}>
-              <option value=''>Search Type</option>
-              <option value='people'>Characters</option>
-              <option value='planets'>Planets</option>
-              <option value='starships'>Starships</option>
-              <option value='vehicles'>Vehicles</option>
-              <option value='films'>Films</option>
-              <option value='species'>Species</option>
-            </select>
-          </fieldset>
-        </div>
         <ErrorMaster>
+          <Fieldset
+            handleInput={this.handleInput}
+            handleSelect={this.handleSelect}
+            handleSubmit={this.handleSubmit}
+            characterInput={this.characterInput}
+            selectInput={this.state.selectInput}
+          />
           <NextPage
             nextLink={this.state.nextLink}
             nextPageUpdateState={this.nextPageUpdateState}

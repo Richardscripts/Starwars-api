@@ -3,14 +3,15 @@ import loopThroughResults from '../HelperFunctions/loopThroughResults';
 
 export default class DisplayFilms extends React.Component {
   render() {
-    let filmsResults = this.props.films.map((film, idx) => {
-      const array = loopThroughResults(film).map((results, idx) => {
+    console.log(this.props.films);
+    let filmsResults = this.props.films.map((films, idx) => {
+      const array = loopThroughResults(films).map((results, idx) => {
         return <li key={idx}>{results}</li>;
       });
       return (
         <ul key={idx} className='results-content'>
           <li>
-            <h2>{film.title}</h2>
+            <h2>{films.title}</h2>
           </li>
           {array}
         </ul>
