@@ -1,10 +1,10 @@
 import React from 'react';
 
-export default class NextPage extends React.Component {
-  handleNextPage = (e) => {
+export default class PrevPageButton extends React.Component {
+  handlePrevPage = (e) => {
     e.preventDefault();
     this.props.toggleLoading();
-    fetch(this.props.nextLink)
+    fetch(this.props.prevLink)
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -13,7 +13,7 @@ export default class NextPage extends React.Component {
         }
       })
       .then((data) => {
-        this.props.nextPageUpdateState(data);
+        this.props.prevPageUpdateState(data);
         window.scrollTo(0, 0);
       })
       .catch((error) => {
@@ -23,13 +23,13 @@ export default class NextPage extends React.Component {
   render() {
     return (
       <>
-        <div className='nextButton-container'>
-          {this.props.nextLink && (
+        <div className='button-wrapper'>
+          {this.props.prevLink && (
             <button
               className='nextButton'
-              onClick={(e) => this.handleNextPage(e)}
+              onClick={(e) => this.handlePrevPage(e)}
             >
-              Next Page
+              Prev Page
             </button>
           )}
         </div>

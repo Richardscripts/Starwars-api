@@ -14,7 +14,10 @@ export default function Fieldset(props) {
             onChange={(e) => props.handleInput(e)}
             ref={props.characterInput}
           />
-          <button type='submit' disabled={props.selectInput === ''}>
+          <button
+            type='submit'
+            disabled={props.loading || props.selectInput === ''}
+          >
             Submit
           </button>
         </form>

@@ -4,9 +4,11 @@ import loopThroughResults from '../HelperFunctions/loopThroughResults';
 export default class DisplayPlanets extends React.Component {
   render() {
     let peopleResults = this.props.people.map((person, idx) => {
-      const array = loopThroughResults(person).map((results, idx) => {
-        return <li key={idx}>{results}</li>;
-      });
+      const array = loopThroughResults(person, this.props.dataForArrays).map(
+        (results, idx) => {
+          return <li key={idx}>{results}</li>;
+        }
+      );
       return (
         <ul key={idx} className='results-content'>
           <li>
