@@ -6,6 +6,7 @@ import NextPageButton from '../NextPageButton/NextPageButton';
 import PrevPageButton from '../PrevPageButton/PrevPageButton';
 import DisplayResults from '../DisplayResults/DisplayResults';
 import Fieldset from '../Fieldset/Fieldset';
+import MoreInfo from '../MoreInfo/MoreInfo';
 
 export default class Search extends React.Component {
   state = {
@@ -21,13 +22,13 @@ export default class Search extends React.Component {
     dataTypes: [],
     nextLink: null,
     prevLink: null,
-    pageNum: null,
+    pageNum: '',
     charInput: '',
     selectInput: '',
     selected: '',
+    moreInfo: false,
     error: null,
     noResult: false,
-    touched: false,
   };
 
   constructor(props) {
@@ -63,7 +64,7 @@ export default class Search extends React.Component {
     let urls = [];
     let data = this.state.dataTypes;
     for (let i = 0; i < data.length; i++) {
-      urls.push(fetch(`https://swapi-thinkful.herokuapp.com/api/${data[i]}`));
+      urls.push(fetch(`${URL}/${data[i]}`));
     }
     Promise.all(urls)
       .then((values) => {
@@ -93,9 +94,7 @@ export default class Search extends React.Component {
     let urls = [];
     let length = Math.ceil(count) / 10;
     for (let i = 1; i < length; i++) {
-      urls.push(
-        fetch(`https://swapi-thinkful.herokuapp.com/api/${type}/?page=${i + 1}`)
-      );
+      urls.push(fetch(`${URL}/${type}/?page=${i + 1}`));
     }
     Promise.all(urls)
       .then((values) => {
@@ -134,13 +133,19 @@ export default class Search extends React.Component {
     });
   };
 
+  handleToggleMoreInfo = (e) => {
+    this.setState({
+      moreInfo: !this.state.moreInfo,
+    });
+  };
+
   nextPageUpdateState = (data) => {
     if (data.next) {
       this.setState({
         dataSearch: data.results,
         nextLink: data.next,
         prevLink: data.previous,
-        pageNum: data.next[data.next.length - 1] - 1,
+        pageNum: data.next.match('[0-9]+')[0] - 1,
         noResult: false,
       });
     } else {
@@ -148,7 +153,7 @@ export default class Search extends React.Component {
         dataSearch: data.results,
         nextLink: data.next,
         prevLink: data.previous,
-        pageNum: 'End',
+        pageNum: parseInt(data.previous.match('[0-9]+')[0]) + 1,
         noResult: false,
       });
     }
@@ -165,7 +170,7 @@ export default class Search extends React.Component {
       dataSearch: data.results,
       nextLink: data.next,
       prevLink: data.previous,
-      pageNum: data.next[data.next.length - 1] - 1,
+      pageNum: data.next.match('[0-9]+')[0] - 1,
       noResult: false,
     });
     this.props.toggleLoading();
@@ -194,6 +199,7 @@ export default class Search extends React.Component {
           prevLink: data.previous,
           noResult: false,
           selected: this.state.selectInput,
+          pageNum: '',
         });
         this.props.toggleLoading();
         if (data.results.length === 0) {
@@ -211,6 +217,7 @@ export default class Search extends React.Component {
   };
 
   render() {
+    console.log(this.state.selected);
     return (
       <>
         <ErrorMaster>
@@ -221,6 +228,9 @@ export default class Search extends React.Component {
             handleSubmit={this.handleSubmit}
             characterInput={this.characterInput}
             selectInput={this.state.selectInput}
+            handleToggleMoreInfo={this.handleToggleMoreInfo}
+            moreInfo={this.state.moreInfo}
+            selectedInput={this.state.slectedInput}
           />
           <div className='page-buttons'>
             <PrevPageButton
@@ -229,7 +239,9 @@ export default class Search extends React.Component {
               toggleLoading={this.props.toggleLoading}
             />
             {this.state.pageNum && (
-              <div className='pageNum'>Page: {this.state.pageNum}</div>
+              <div className='page'>
+                Pg: <strong>{this.state.pageNum}</strong>
+              </div>
             )}
             <NextPageButton
               nextLink={this.state.nextLink}
@@ -237,9 +249,16 @@ export default class Search extends React.Component {
               toggleLoading={this.props.toggleLoading}
             />
           </div>
+          {this.state.dataSearch.length > 0 && <hr />}
           {this.state.error && <span>Sorry: {this.state.error}</span>}
           {this.state.noResult && <span>Sorry: No results found.</span>}
+          {this.state.moreInfo && (
+            <>
+              <MoreInfo selectInput={this.state.selectInput} />
+            </>
+          )}
           <DisplayResults state={this.state} />
+          {this.state.dataSearch.length > 0 && <hr />}
           <div className='page-buttons'>
             <PrevPageButton
               prevLink={this.state.prevLink}
@@ -247,7 +266,9 @@ export default class Search extends React.Component {
               toggleLoading={this.props.toggleLoading}
             />
             {this.state.pageNum && (
-              <div className='pageNum'>Page: {this.state.pageNum}</div>
+              <div className='page'>
+                Pg: <strong>{this.state.pageNum}</strong>
+              </div>
             )}
             <NextPageButton
               nextLink={this.state.nextLink}

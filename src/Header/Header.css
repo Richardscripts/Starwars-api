@@ -16,12 +16,18 @@ header {
 }
 
 h1 {
-  transform: scale(0.7, 2);
+  transform: scale(1.1, 2);
   font-family: 'Tomorrow', sans-serif;
+  margin: 32px 0px 32px;
 }
 
-@media all and (min-width: 600px) {
+@media all and (min-width: 800px) {
   header {
-    font-size: 48px;
+    font-size: 46px;
+  }
+
+  h1 {
+    transform: scale(1, 2.2);
+    font-family: 'Tomorrow', sans-serif;
   }
 }
