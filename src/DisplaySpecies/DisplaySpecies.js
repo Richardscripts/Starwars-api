@@ -4,9 +4,11 @@ import loopThroughResults from '../HelperFunctions/loopThroughResults';
 export default class DisplaySpecies extends React.Component {
   render() {
     let speciesResults = this.props.species.map((specie, idx) => {
-      const array = loopThroughResults(specie).map((results, idx) => {
-        return <li key={idx}>{results}</li>;
-      });
+      const array = loopThroughResults(specie, this.props.dataForArrays).map(
+        (results, idx) => {
+          return <li key={idx}>{results}</li>;
+        }
+      );
       return (
         <ul key={idx} className='results-content'>
           <li>

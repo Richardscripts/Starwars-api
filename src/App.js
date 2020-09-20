@@ -21,7 +21,10 @@ class App extends React.Component {
       <ErrorMaster>
         <div className='App'>
           <Header />
-          <Search toggleLoading={this.toggleLoading} />
+          <Search
+            loading={this.state.loading}
+            toggleLoading={this.toggleLoading}
+          />
           {this.state.loading && (
             <img
               src={loading}

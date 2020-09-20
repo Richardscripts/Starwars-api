@@ -1,0 +1,46 @@
+section {
+  font-size: 6px;
+  margin: 3px;
+}
+
+section > ul > li {
+  font-size: 15px;
+  text-transform: none;
+  font-family: monospace, courier, arial;
+  width: 99%;
+}
+
+section > ul {
+  border: 3px solid black;
+  background-color: rgb(243, 243, 243);
+}
+
+h3 {
+  width: 100px;
+  text-align: center;
+  margin: auto;
+  font-size: 16px;
+  padding: 2px;
+  font-weight: 400;
+  border: 1px solid rgb(144, 144, 144);
+  background-color: white;
+}
+
+b {
+  font-size: 16px;
+  padding: 2px;
+  font-weight: 400;
+  border: 1px solid rgb(144, 144, 144);
+  background-color: white;
+}
+
+.tip-text {
+  background-color: white;
+  line-height: 1.5;
+}
+
+@media all and (min-width: 600px) {
+  section > ul {
+    width: 400px;
+  }
+}

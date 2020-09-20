@@ -9,23 +9,41 @@ import DisplayStarships from '../DisplayStarships/DisplayStarships';
 export default function DisplayResults(props) {
   return (
     <>
-      {props.state.selectInput === 'people' && (
-        <DisplayPeople people={props.state.data} />
+      {props.state.selected === 'people' && (
+        <DisplayPeople
+          people={props.state.dataSearch}
+          dataForArrays={props.state.dataForArrays}
+        />
       )}
-      {props.state.selectInput === 'planets' && (
-        <DisplayPlanets planets={props.state.data} />
+      {props.state.selected === 'planets' && (
+        <DisplayPlanets
+          planets={props.state.dataSearch}
+          dataForArrays={props.state.dataForArrays}
+        />
       )}
-      {props.state.selectInput === 'species' && (
-        <DisplaySpecies species={props.state.data} />
+      {props.state.selected === 'species' && (
+        <DisplaySpecies
+          species={props.state.dataSearch}
+          dataForArrays={props.state.dataForArrays}
+        />
       )}
-      {props.state.selectInput === 'vehicles' && (
-        <DisplayVehicles vehicles={props.state.data} />
+      {props.state.selected === 'vehicles' && (
+        <DisplayVehicles
+          vehicles={props.state.dataSearch}
+          dataForArrays={props.state.dataForArrays}
+        />
       )}
-      {props.state.selectInput === 'films' && (
-        <DisplayFilms films={props.state.data} />
+      {props.state.selected === 'films' && (
+        <DisplayFilms
+          films={props.state.dataSearch}
+          dataForArrays={props.state.dataForArrays}
+        />
       )}
-      {props.state.selectInput === 'starships' && (
-        <DisplayStarships starships={props.state.data} />
+      {props.state.selected === 'starships' && (
+        <DisplayStarships
+          starships={props.state.dataSearch}
+          dataForArrays={props.state.dataForArrays}
+        />
       )}
     </>
   );

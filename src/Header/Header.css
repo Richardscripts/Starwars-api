@@ -1,20 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Tomorrow:wght@500&display=swap');
+
 header {
   display: flex;
   justify-content: center;
-  position: relative;
   font-family: verdana;
   font-weight: bold;
   text-transform: uppercase;
   text-align: center;
-  font-size: 24px;
-  color: rgb(255, 176, 73);
-  text-shadow: rgb(0, 0, 0) 3px 2px 2px;
+  font-size: 30px;
+  color: #e0e0e0;
+  text-shadow: rgb(0, 0, 0) 0px 3px 2px;
   word-wrap: break-word;
-  margin: 30px;
+  margin: 50px;
+  line-height: 0.9;
 }
 
-@media all and (min-width: 600px) {
+h1 {
+  transform: scale(1.1, 2);
+  font-family: 'Tomorrow', sans-serif;
+  margin: 32px 0px 32px;
+}
+
+@media all and (min-width: 800px) {
   header {
-    font-size: 38px;
+    font-size: 46px;
+  }
+
+  h1 {
+    transform: scale(1, 2.2);
+    font-family: 'Tomorrow', sans-serif;
   }
 }
